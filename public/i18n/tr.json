@@ -17,7 +17,9 @@
     "next": "İleri",
     "send": "Gönder",
     "reply": "Yanıtla",
-    "close": "Kapat"
+    "close": "Kapat",
+    "refresh": "Yenile",
+    "clear": "Temizle"
   },
   "language": {
     "select": "Dil seçin",
@@ -38,27 +40,83 @@
   },
   "home": {
     "title": "Ana Sayfa",
+    "quickActions": "Hızlı İşlemler",
     "sendMessage": "Mesaj gönder",
+    "sendDescription": "Düşüncelerinizi biriyle paylaşın",
     "receivedMessages": "Gelen mesajlar",
+    "messagesDescription": "Diğerlerinden gelen mesajları görüntüleyin",
+    "recentMessages": "Son mesajlar",
+    "viewAll": "Tümünü görüntüle",
     "stats": "İstatistikler",
     "messagesSent": "Gönderilen",
     "messagesReceived": "Alınan",
-    "repliesSent": "Yanıt gönderilen"
+    "repliesSent": "Yanıt gönderilen",
+    "welcome": {
+      "morning": "Günaydın! ☀️",
+      "afternoon": "İyi günler! 🌤️",
+      "evening": "İyi akşamlar! 🌙",
+      "new": "Hoş geldiniz!",
+      "description": "İlk mesajınızı denize göndererek başlayın"
+    },
+    "sendFirstMessage": "İlk mesajı gönder"
   },
   "message": {
     "send": {
       "title": "Mesaj gönder",
-      "placeholder": "Düşüncelerinizi paylaşın...",
+      "subtitle": "Düşüncelerinizi denize bırakın",
+      "label": "Mesajınız",
+      "placeholder": "İçinizi döküp düşüncelerinizi paylaşın...",
       "button": "Şişeyi denize at",
-      "success": "Mesaj denize gönderildi",
+      "sending": "Gönderiliyor...",
+      "success": "Mesaj denize gönderildi! 🌊",
+      "successDescription": "Mesajınız okyanusta yüzüyor ve yakında birileri bulacak.",
       "error": "Mesaj gönderme hatası",
       "empty": "Mesaj boş olamaz",
-      "tooLong": "Mesaj çok uzun"
+      "tooShort": "Mesaj en az {{min}} karakter olmalı",
+      "tooLong": "Mesaj en fazla {{max}} karakter olabilir",
+      "suggestions": "Mesaj önerileri",
+      "tips": {
+        "title": "İpuçları",
+        "authentic": "Samimi ve gerçek olun",
+        "respectful": "Saygılı bir dil kullanın",
+        "anonymous": "Tamamen anonim, kimliğiniz gizli"
+      },
+      "shortcuts": "Klavye kısayolları"
+    },
+    "suggestions": {
+      "feeling": "Bugün kendimi biraz kaybolmuş hissediyorum...",
+      "support": "Biraz destek ve anlayışa ihtiyacım var",
+      "grateful": "Hayatımda minnettarlık duyduğum şeyler var",
+      "confused": "Kafam karışık ve ne yapacağımı bilmiyorum",
+      "excited": "Heyecanlıyım ama bunu kimseyle paylaşamıyorum"
     },
     "received": {
       "title": "Gelen mesajlar",
-      "empty": "Henüz mesaj yok",
-      "newMessage": "Yeni mesaj",
+      "subtitle": "Size ulaşan şişeler",
+      "search": "Mesajlarda ara...",
+      "clearSearch": "Aramayı temizle",
+      "empty": {
+        "title": "Henüz mesaj yok",
+        "description": "Size ulaşan ilk şişeyi bekliyoruz"
+      },
+      "noResults": {
+        "title": "Sonuç bulunamadı",
+        "description": "Arama kriterlerinize uygun mesaj yok"
+      },
+      "noFilter": {
+        "title": "Bu kategoride mesaj yok",
+        "description": "Farklı bir filtre deneyin"
+      },
+      "filters": {
+        "all": "Tümü",
+        "unread": "Okunmamış",
+        "replied": "Yanıtlanan"
+      },
+      "stats": {
+        "total": "Toplam",
+        "unread": "Okunmamış",
+        "replied": "Yanıtlanan"
+      },
       "timeAgo": "{{time}} önce",
       "canReply": "Yanıtlayabilirsiniz",
       "alreadyReplied": "Zaten yanıtlandı",
@@ -66,46 +124,24 @@
     }
   },
   "reply": {
-    "title": "Mesajı yanıtla",
-    "selectTemplate": "Bir yanıt seçin",
-    "categories": {
-      "SUPPORT": "Destek",
-      "EMPATHY": "Empati",
-      "ENCOURAGEMENT": "Cesaret",
-      "MOTIVATION": "Motivasyon",
-      "UNDERSTANDING": "Anlayış"
+    "subtitle": "Hazır cevaplarla yanıtlayın",
+    "originalMessage": "Orijinal mesaj",
+    "selectCategory": "Bir kategori seçin",
+    "preview": "Önizleme",
+    "send": "Yanıtı gönder",
+    "sending": "Gönderiliyor...",
+    "successDescription": "Yanıtınız kişiye ulaştı ve ona destek oldu.",
+    "instructions": {
+      "title": "Nasıl yanıtlanır?",
+      "step1": "Mesajın tonuna uygun bir kategori seçin",
+      "step2": "Kategoriden uygun bir şablon seçin",
+      "step3": "Önizlemeyi kontrol edin",
+      "step4": "Yanıtı gönderin"
     },
-    "templates": {
-      "support": {
-        "1": "Anlıyorum, yalnız değilsin ❤️",
-        "2": "Dayan, her şey yoluna girecek 🤗",
-        "3": "Paylaştığın için teşekkürler 💙"
-      },
-      "empathy": {
-        "1": "Ben de aynısını hissettim 😊",
-        "2": "Bu çok zor olmalı 💙",
-        "3": "Hislerin geçerli ✨"
-      },
-      "encouragement": {
-        "1": "Düşündüğünden daha güçlüsün 💪",
-        "2": "Yarın yeni bir gün 🌅",
-        "3": "Başarabilirsin 🌟"
-      },
-      "motivation": {
-        "1": "Adım adım 🚶‍♀️",
-        "2": "Doğru yoldasın ✨",
-        "3": "İlerlemeye devam et 🌈"
-      },
-      "understanding": {
-        "1": "Kendine karşı nazik ol 🌸",
-        "2": "Bu normal 💚",
-        "3": "Hissetmene izin ver 🤲"
-      }
-    },
-    "success": "Yanıt gönderildi",
-    "error": "Yanıt gönderme hatası",
-    "alreadyReplied": "Bu mesajı zaten yanıtladınız",
-    "oneReplyOnly": "Sadece bir kez yanıtlayabilirsiniz"
+    "reminder": {
+      "title": "Önemli Hatırlatma",
+      "text": "Her mesaja sadece bir kez yanıt verebilirsiniz. Lütfen düşünerek seçin."
+    }
   },
   "navigation": {
     "home": "Ana Sayfa",

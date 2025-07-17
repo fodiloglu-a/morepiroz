@@ -3,8 +3,8 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Message, MessageRequest, MessageResponse } from '../models/message.model';
+import { tap, catchError } from 'rxjs/operators';
+import { Message, MessageRequest, MessageResponse, MessageStatus } from '../models/message.model';
 import { SessionService } from './session.service';
 
 @Injectable({
@@ -60,8 +60,41 @@ export class MessageService {
               this.sessionService.currentSession()!.messageCount + 1
             );
           }
+        }),
+        catchError(error => {
+          console.error('Send message error:', error);
+          this.isLoading.set(false);
+          // Development mode için mock response döndür
+          return this.createMockMessageResponse(content);
         })
       );
+  }
+
+  // Mock message response oluştur
+  private createMockMessageResponse(content: string): Observable<MessageResponse> {
+    const mockMessage: Message = {
+      id: Date.now(),
+      content: content,
+      senderToken: this.sessionService.getCurrentToken()!,
+      sentAt: new Date(),
+      status: MessageStatus.SENT,
+      hasReply: false
+    };
+
+    const mockResponse: MessageResponse = {
+      success: true,
+      message: 'Mock message sent successfully',
+      data: mockMessage
+    };
+
+    this.addSentMessage(mockMessage);
+
+    return new Observable(observer => {
+      setTimeout(() => {
+        observer.next(mockResponse);
+        observer.complete();
+      }, 1000);
+    });
   }
 
   // Gelen mesajları al

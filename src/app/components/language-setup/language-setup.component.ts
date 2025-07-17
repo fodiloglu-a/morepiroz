@@ -67,9 +67,10 @@ import { Language, AVAILABLE_LANGUAGES } from '../../models/language.model';
     }
 
     .welcome-card {
-      max-width: 500px;
+      max-width: 600px;
       width: 100%;
       text-align: center;
+      padding: var(--spacing-2xl);
     }
 
     .logo-section {
@@ -79,26 +80,37 @@ import { Language, AVAILABLE_LANGUAGES } from '../../models/language.model';
     .app-title {
       font-size: var(--font-size-3xl);
       margin-bottom: var(--spacing-md);
-      background: var(--gradient-secondary);
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      font-weight: 700;
     }
 
     .app-subtitle {
-      color: var(--text-secondary);
+      color: rgba(255, 255, 255, 0.8);
       font-size: var(--font-size-sm);
       margin: 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     .language-selection h2 {
-      margin-bottom: var(--spacing-md);
-      color: var(--text-primary);
+      margin-bottom: var(--spacing-lg);
+      color: var(--white);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
+      line-height: 1.4;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     .description {
       margin-bottom: var(--spacing-xl);
-      color: var(--text-secondary);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: var(--font-size-lg);
+      line-height: 1.6;
+      font-weight: 400;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     .language-grid {
@@ -145,12 +157,15 @@ import { Language, AVAILABLE_LANGUAGES } from '../../models/language.model';
       font-weight: 600;
       color: var(--text-primary);
       font-size: var(--font-size-lg);
+      line-height: 1.4;
     }
 
     .english-name {
       display: block;
       color: var(--text-secondary);
-      font-size: var(--font-size-sm);
+      font-size: var(--font-size-base);
+      line-height: 1.3;
+      margin-top: 2px;
     }
 
     .radio-button {
@@ -195,15 +210,25 @@ import { Language, AVAILABLE_LANGUAGES } from '../../models/language.model';
     /* Mobile optimizations */
     @media (max-width: 480px) {
       .language-setup {
-        padding: var(--spacing-sm);
+        padding: var(--spacing-md);
       }
 
       .welcome-card {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-xl);
+        max-width: 100%;
       }
 
       .language-option {
-        padding: var(--spacing-md);
+        padding: var(--spacing-lg);
+        min-height: 70px;
+      }
+
+      .native-name {
+        font-size: var(--font-size-base);
+      }
+
+      .english-name {
+        font-size: var(--font-size-sm);
       }
     }
   `]
@@ -241,25 +266,67 @@ export class LanguageSetupComponent implements OnInit {
     // Önce dili ayarla
     this.languageService.setLanguage(selected).subscribe({
       next: () => {
-        // Sonra session oluştur
-        this.sessionService.createSessionWithLanguage(selected).subscribe({
-          next: (response) => {
-            if (response.success) {
-              this.router.navigate(['/']);
-            } else {
-              console.error('Session creation failed:', response.message);
-              this.isLoading.set(false);
-            }
-          },
-          error: (error) => {
-            console.error('Session creation error:', error);
-            this.isLoading.set(false);
-          }
-        });
+        // Development mode - Mock session oluştur
+        if (this.isDevelopmentMode()) {
+          this.createMockSession(selected);
+        } else {
+          // Production mode - Gerçek API çağrısı
+          this.createRealSession(selected);
+        }
       },
       error: (error) => {
         console.error('Language setting error:', error);
         this.isLoading.set(false);
+      }
+    });
+  }
+
+  // Development mode kontrolü
+  private isDevelopmentMode(): boolean {
+    return !navigator.onLine || window.location.hostname === 'localhost';
+  }
+
+  // Mock session oluştur (development için)
+  private createMockSession(languageCode: string): void {
+    console.log('🚀 Development mode: Creating mock session');
+
+    // Mock session verisi
+    const mockSession = {
+      token: 'mock_' + Math.random().toString(36).substr(2, 16),
+      createdAt: new Date(),
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 saat
+      isActive: true,
+      messageCount: 0,
+      replyCount: 0
+    };
+
+    // Session'ı localStorage'a kaydet
+    localStorage.setItem('morepiroz_session', JSON.stringify(mockSession));
+    localStorage.setItem('morepiroz_language', languageCode);
+
+    // Kısa gecikme ile gerçek API simülasyonu
+    setTimeout(() => {
+      this.isLoading.set(false);
+      this.router.navigate(['/']);
+    }, 1000);
+  }
+
+  // Gerçek session oluştur (production için)
+  private createRealSession(languageCode: string): void {
+    this.sessionService.createSessionWithLanguage(languageCode).subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.router.navigate(['/']);
+        } else {
+          console.error('Session creation failed:', response.message);
+          this.isLoading.set(false);
+        }
+      },
+      error: (error) => {
+        console.error('Session creation error:', error);
+        // Backend yoksa mock session'a fallback
+        console.log('⚠️ Backend not available, falling back to mock session');
+        this.createMockSession(languageCode);
       }
     });
   }

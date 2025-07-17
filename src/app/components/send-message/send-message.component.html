@@ -1,1 +1,144 @@
-<p>send-message works!</p>
+<!-- src/app/components/send-message/send-message.component.html -->
+
+<div class="send-message-container">
+
+  <!-- Success State -->
+  <div class="success-overlay" *ngIf="showSuccess()">
+    <div class="success-content card">
+      <div class="success-icon">🌊</div>
+      <h2>{{ 'message.send.success' | translate }}</h2>
+      <p>{{ 'message.send.successDescription' | translate }}</p>
+      <div class="success-animation">
+        <div class="bottle">🍾</div>
+        <div class="waves">~~~</div>
+      </div>
+      <button class="btn btn-primary" (click)="goHome()">
+        {{ 'home.title' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Form -->
+  <div class="form-container" *ngIf="!showSuccess()">
+
+    <!-- Header -->
+    <div class="card form-header">
+      <div class="header-content">
+        <button class="btn-icon back-btn" (click)="goHome()">
+          ←
+        </button>
+        <div class="header-text">
+          <h1>{{ 'message.send.title' | translate }}</h1>
+          <p>{{ 'message.send.subtitle' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message Input Card -->
+    <div class="card message-card">
+      <div class="message-input-section">
+        <label class="input-label">
+          {{ 'message.send.label' | translate }}
+        </label>
+
+        <div class="textarea-container">
+          <textarea
+            #messageTextarea
+            class="message-textarea"
+            [placeholder]="'message.send.placeholder' | translate"
+            [value]="messageContent()"
+            (input)="onMessageChange($any($event.target).value)"
+            (keydown)="onKeyDown($event)"
+            [attr.maxlength]="MAX_LENGTH"
+            rows="6"
+          ></textarea>
+
+          <!-- Character Count -->
+          <div class="character-info">
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                [style.width.%]="getProgressPercentage()"
+                [style.background-color]="getProgressColor()"
+              ></div>
+            </div>
+            <span
+              class="character-count"
+              [style.color]="getCharacterCountColor()"
+            >
+              {{ characterCount() }}/{{ MAX_LENGTH }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Validation Error -->
+        <div class="error-message" *ngIf="validationError()">
+          ⚠️ {{ validationError() }}
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button
+            class="btn btn-secondary"
+            (click)="clearMessage()"
+            [disabled]="isSending() || characterCount() === 0"
+          >
+            {{ 'common.clear' | translate }}
+          </button>
+
+          <button
+            class="btn btn-primary btn-large"
+            (click)="sendMessage()"
+            [disabled]="!canSendMessage()"
+            [class.loading]="isSending()"
+          >
+            <span *ngIf="!isSending()">
+              🍾 {{ 'message.send.button' | translate }}
+            </span>
+            <span *ngIf="isSending()" class="loading-text">
+              <span class="spinner"></span>
+              {{ 'message.send.sending' | translate }}
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message Suggestions -->
+    <div class="card suggestions-card">
+      <h3>{{ 'message.send.suggestions' | translate }}</h3>
+      <div class="suggestions-grid">
+        <button
+          *ngFor="let suggestion of getSuggestedMessages()"
+          class="suggestion-item"
+          (click)="selectSuggestion(suggestion)"
+          [disabled]="isSending()"
+        >
+          {{ suggestion }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Tips Card -->
+    <div class="card tips-card">
+      <h3>{{ 'message.send.tips.title' | translate }}</h3>
+      <ul class="tips-list">
+        <li>{{ 'message.send.tips.authentic' | translate }}</li>
+        <li>{{ 'message.send.tips.respectful' | translate }}</li>
+        <li>{{ 'message.send.tips.anonymous' | translate }}</li>
+      </ul>
+
+      <div class="keyboard-shortcuts">
+        <h4>{{ 'message.send.shortcuts' | translate }}</h4>
+        <div class="shortcut-item">
+          <kbd>Ctrl</kbd> + <kbd>Enter</kbd> = {{ 'common.send' | translate }}
+        </div>
+        <div class="shortcut-item">
+          <kbd>Esc</kbd> = {{ 'common.clear' | translate }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

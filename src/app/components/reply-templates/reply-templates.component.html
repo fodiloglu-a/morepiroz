@@ -1,1 +1,148 @@
-<p>reply-templates works!</p>
+<!-- src/app/components/reply-templates/reply-templates.component.html -->
+
+<div class="reply-container">
+
+  <!-- Success Overlay -->
+  <div class="success-overlay" *ngIf="showSuccess()">
+    <div class="success-content card">
+      <div class="success-icon">💌</div>
+      <h2>{{ 'reply.success' | translate }}</h2>
+      <p>{{ 'reply.successDescription' | translate }}</p>
+      <div class="success-animation">
+        <div class="heart">💙</div>
+        <div class="sparkles">✨</div>
+      </div>
+      <button class="btn btn-primary" (click)="goHome()">
+        {{ 'home.title' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="reply-content" *ngIf="!showSuccess()">
+
+    <!-- Header -->
+    <div class="card reply-header">
+      <div class="header-content">
+        <button class="btn-icon back-btn" (click)="goBack()">
+          ←
+        </button>
+        <div class="header-text">
+          <h1>{{ 'reply.title' | translate }}</h1>
+          <p>{{ 'reply.subtitle' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Original Message -->
+    <div class="card message-card" *ngIf="currentMessage()">
+      <h3>{{ 'reply.originalMessage' | translate }}</h3>
+      <div class="original-message">
+        <p>{{ currentMessage()!.content }}</p>
+        <div class="message-time">
+          {{ getTimeAgo(currentMessage()!.sentAt) }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="card loading-card" *ngIf="isLoading()">
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <p>{{ 'common.loading' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Category Selection -->
+    <div class="card categories-card" *ngIf="!isLoading()">
+      <h3>{{ 'reply.selectCategory' | translate }}</h3>
+      <div class="categories-grid">
+        <button
+          *ngFor="let category of categories"
+          class="category-item"
+          [class.selected]="isCategorySelected(category)"
+          [style.border-color]="getCategoryColor(category)"
+          (click)="selectCategory(category)"
+        >
+          <div class="category-icon">{{ getCategoryIcon(category) }}</div>
+          <div class="category-name">{{ getCategoryDisplayName(category) }}</div>
+          <div class="category-count">
+            {{ getTemplatesByCategory(category).length }}
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Template Selection -->
+    <div class="card templates-card" *ngIf="selectedCategory() && !isLoading()">
+      <h3>{{ 'reply.selectTemplate' | translate }}</h3>
+      <div class="templates-list">
+        <button
+          *ngFor="let template of getTemplatesByCategory(selectedCategory()!)"
+          class="template-item"
+          [class.selected]="isTemplateSelected(template)"
+          (click)="selectTemplate(template)"
+        >
+          <div class="template-content">
+            <span class="template-emoji">{{ template.emoji }}</span>
+            <span class="template-text">{{ template.text }}</span>
+          </div>
+          <div class="template-check" *ngIf="isTemplateSelected(template)">✓</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Preview & Send -->
+    <div class="card preview-card" *ngIf="selectedTemplate()">
+      <h3>{{ 'reply.preview' | translate }}</h3>
+      <div class="reply-preview">
+        <div class="preview-bubble">
+          <span class="preview-emoji">{{ selectedTemplate()!.emoji }}</span>
+          <span class="preview-text">{{ selectedTemplate()!.text }}</span>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-message" *ngIf="errorMessage()">
+        ⚠️ {{ errorMessage() }}
+      </div>
+
+      <!-- Send Button -->
+      <button
+        class="btn btn-primary btn-large btn-full send-btn"
+        [disabled]="!canSendReply()"
+        [class.loading]="isSending()"
+        (click)="sendReply()"
+      >
+        <span *ngIf="!isSending()">
+          💌 {{ 'reply.send' | translate }}
+        </span>
+        <span *ngIf="isSending()" class="loading-text">
+          <span class="spinner"></span>
+          {{ 'reply.sending' | translate }}
+        </span>
+      </button>
+    </div>
+
+    <!-- Instructions -->
+    <div class="card instructions-card">
+      <h3>{{ 'reply.instructions.title' | translate }}</h3>
+      <ul class="instructions-list">
+        <li>{{ 'reply.instructions.step1' | translate }}</li>
+        <li>{{ 'reply.instructions.step2' | translate }}</li>
+        <li>{{ 'reply.instructions.step3' | translate }}</li>
+        <li>{{ 'reply.instructions.step4' | translate }}</li>
+      </ul>
+
+      <div class="reminder">
+        <div class="reminder-icon">⚠️</div>
+        <div class="reminder-text">
+          <strong>{{ 'reply.reminder.title' | translate }}</strong>
+          <p>{{ 'reply.reminder.text' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

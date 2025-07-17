@@ -1,1 +1,182 @@
-<p>received-messages works!</p>
+<!-- src/app/components/received-messages/received-messages.component.html -->
+
+<div class="messages-container">
+
+  <!-- Header -->
+  <div class="card messages-header">
+    <div class="header-content">
+      <button class="btn-icon back-btn" (click)="goHome()">
+        ←
+      </button>
+      <div class="header-text">
+        <h1>{{ 'message.received.title' | translate }}</h1>
+        <p>{{ 'message.received.subtitle' | translate }}</p>
+      </div>
+      <button
+        class="btn-icon refresh-btn"
+        (click)="refresh()"
+        [disabled]="isLoading()"
+        [title]="'common.refresh' | translate"
+      >
+        🔄
+      </button>
+    </div>
+  </div>
+
+  <!-- Search & Filters -->
+  <div class="card filters-card">
+    <!-- Search Bar -->
+    <div class="search-section">
+      <div class="search-input-container">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          class="search-input"
+          [placeholder]="'message.received.search' | translate"
+          [value]="searchQuery()"
+          (input)="onSearch($any($event.target).value)"
+        />
+        <button
+          *ngIf="searchQuery()"
+          class="clear-search-btn"
+          (click)="onSearch('')"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button
+        class="filter-tab"
+        [class.active]="selectedFilter() === 'all'"
+        (click)="setFilter('all')"
+      >
+        {{ 'message.received.filters.all' | translate }}
+        <span class="filter-badge">{{ getFilterBadgeCount('all') }}</span>
+      </button>
+
+      <button
+        class="filter-tab"
+        [class.active]="selectedFilter() === 'unread'"
+        (click)="setFilter('unread')"
+      >
+        {{ 'message.received.filters.unread' | translate }}
+        <span class="filter-badge unread">{{ getFilterBadgeCount('unread') }}</span>
+      </button>
+
+      <button
+        class="filter-tab"
+        [class.active]="selectedFilter() === 'replied'"
+        (click)="setFilter('replied')"
+      >
+        {{ 'message.received.filters.replied' | translate }}
+        <span class="filter-badge replied">{{ getFilterBadgeCount('replied') }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="card loading-card" *ngIf="isLoading()">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>{{ 'common.loading' | translate }}</p>
+    </div>
+  </div>
+
+  <!-- Messages List -->
+  <div class="messages-list" *ngIf="!isLoading()">
+
+    <!-- Message Items -->
+    <div
+      *ngFor="let message of filteredMessages(); trackBy: trackByMessageId"
+      class="card message-item"
+      [class.unread]="!message.hasReply"
+      [class.replied]="message.hasReply"
+      (click)="replyToMessage(message)"
+    >
+      <div class="message-header">
+        <div class="message-status">
+          <span class="status-icon">{{ getStatusIcon(message) }}</span>
+          <span
+            class="status-text"
+            [style.color]="getStatusColor(message)"
+          >
+            {{ getStatusText(message) }}
+          </span>
+        </div>
+        <div class="message-time">
+          {{ getTimeAgo(message.sentAt) }}
+        </div>
+      </div>
+
+      <div class="message-content">
+        <p class="message-text">{{ message.content }}</p>
+      </div>
+
+      <div class="message-footer" *ngIf="!message.hasReply">
+        <button class="reply-btn">
+          💌 {{ 'message.received.reply' | translate }}
+        </button>
+        <span class="arrow-icon">→</span>
+      </div>
+    </div>
+
+    <!-- Empty States -->
+
+    <!-- No messages at all -->
+    <div class="card empty-card" *ngIf="!hasMessages()">
+      <div class="empty-content">
+        <div class="empty-icon">📭</div>
+        <h3>{{ 'message.received.empty.title' | translate }}</h3>
+        <p>{{ 'message.received.empty.description' | translate }}</p>
+        <button class="btn btn-primary" (click)="goHome()">
+          {{ 'home.title' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!-- No search results -->
+    <div class="card empty-card" *ngIf="hasMessages() && !hasFilteredResults() && isSearching()">
+      <div class="empty-content">
+        <div class="empty-icon">🔍</div>
+        <h3>{{ 'message.received.noResults.title' | translate }}</h3>
+        <p>{{ 'message.received.noResults.description' | translate }}</p>
+        <button class="btn btn-secondary" (click)="onSearch('')">
+          {{ 'message.received.clearSearch' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!-- No messages in filter -->
+    <div class="card empty-card" *ngIf="hasMessages() && !hasFilteredResults() && !isSearching()">
+      <div class="empty-content">
+        <div class="empty-icon">📂</div>
+        <h3>{{ 'message.received.noFilter.title' | translate }}</h3>
+        <p>{{ 'message.received.noFilter.description' | translate }}</p>
+        <button class="btn btn-secondary" (click)="setFilter('all')">
+          {{ 'message.received.filters.all' | translate }}
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Stats Footer -->
+  <div class="card stats-footer" *ngIf="hasMessages() && !isLoading()">
+    <div class="stats-item">
+      <span class="stats-number">{{ totalCount() }}</span>
+      <span class="stats-label">{{ 'message.received.stats.total' | translate }}</span>
+    </div>
+    <div class="stats-item">
+      <span class="stats-number">{{ unreadCount() }}</span>
+      <span class="stats-label">{{ 'message.received.stats.unread' | translate }}</span>
+    </div>
+    <div class="stats-item">
+      <span class="stats-number">{{ repliedCount() }}</span>
+      <span class="stats-label">{{ 'message.received.stats.replied' | translate }}</span>
+    </div>
+  </div>
+
+</div>

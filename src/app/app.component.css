@@ -1,0 +1,224 @@
+/* src/app/app.component.css */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--gradient-primary);
+}
+
+.app.rtl {
+  direction: rtl;
+}
+
+/* Header */
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  box-shadow: var(--shadow-soft);
+}
+
+.header-content {
+  max-width: var(--container-desktop);
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin: 0;
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.settings-btn {
+  background: var(--white);
+  border: 2px solid var(--light-gray);
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.settings-btn:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+  transform: rotate(90deg);
+}
+
+/* Main Content */
+.app-main {
+  flex: 1;
+  padding-bottom: 80px; /* Bottom nav space */
+  overflow-x: hidden;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-top: 1px solid var(--light-gray);
+  box-shadow: var(--shadow-medium);
+  z-index: var(--z-header);
+}
+
+.nav-items {
+  display: flex;
+  max-width: var(--container-desktop);
+  margin: 0 auto;
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--spacing-sm);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 60px;
+  justify-content: center;
+}
+
+.nav-item:hover {
+  background: var(--light-gray);
+}
+
+.nav-item.active {
+  color: var(--primary-blue);
+  background: rgba(25, 118, 210, 0.1);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-blue);
+}
+
+.nav-icon {
+  font-size: var(--font-size-lg);
+}
+
+.nav-label {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 50%;
+  transform: translateX(12px);
+  background: #e53e3e;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+}
+
+.loading-content {
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.loading-content .spinner {
+  margin: 0 auto var(--spacing-md);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+  .header-content {
+    padding: var(--spacing-sm);
+  }
+
+  .app-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .app-subtitle {
+    font-size: 10px;
+  }
+
+  .nav-item {
+    padding: var(--spacing-xs);
+    min-height: 56px;
+  }
+
+  .nav-label {
+    font-size: 10px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 481px) and (max-width: 768px) {
+  .header-content {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+}
+
+/* Hide header and nav for certain routes */
+.hide-header .app-header,
+.hide-nav .bottom-nav {
+  display: none;
+}
+
+.hide-nav .app-main {
+  padding-bottom: 0;
+}

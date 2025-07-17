@@ -81,7 +81,7 @@ export class LanguageService {
   private loadTranslations(languageCode: string): Observable<Translation> {
     this.isLoading.set(true);
 
-    return this.http.get<Translation>(`/assets/i18n/${languageCode}.json`)
+    return this.http.get<Translation>(`./i18n/${languageCode}.json`)
       .pipe(
         map(translations => {
           this.TRANSLATION_CACHE.set(languageCode, translations);

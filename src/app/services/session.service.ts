@@ -94,8 +94,25 @@ export class SessionService {
     return session?.token || null;
   }
 
-  // Oturum var mı?
+  // Oturum var mı? (Development mode desteği ile)
   hasValidSession(): boolean {
+    // Önce localStorage'dan kontrol et
+    const sessionData = localStorage.getItem(this.SESSION_KEY);
+    if (sessionData) {
+      try {
+        const session: UserSession = JSON.parse(sessionData);
+        if (this.isSessionValid(session)) {
+          // Session'ı signal'a set et
+          this.currentSessionSubject.next(session);
+          this.currentSession.set(session);
+          return true;
+        }
+      } catch (error) {
+        console.error('Session parsing error:', error);
+      }
+    }
+
+    // Mevcut signal'dan kontrol et
     const session = this.currentSession();
     return session ? this.isSessionValid(session) : false;
   }

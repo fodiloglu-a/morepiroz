@@ -1,1 +1,140 @@
-<p>home works!</p>
+<!-- src/app/components/home/home.component.html -->
+
+<div class="home-container">
+
+  <!-- Welcome Card -->
+  <div class="card welcome-card slide-up">
+    <div class="welcome-content">
+      <div class="welcome-icon">🌊</div>
+      <h1 class="welcome-title">{{ 'app.name' | translate }}</h1>
+      <p class="welcome-subtitle">{{ 'app.description' | translate }}</p>
+      <p class="welcome-message" *ngIf="welcomeMessage()">{{ welcomeMessage() }}</p>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="card actions-card">
+    <h2 class="card-title">{{ 'home.quickActions' | translate }}</h2>
+
+    <div class="action-buttons">
+      <button
+        class="action-btn primary-action"
+        (click)="navigateToSend()"
+      >
+        <div class="action-icon">📝</div>
+        <div class="action-content">
+          <h3>{{ 'home.sendMessage' | translate }}</h3>
+          <p>{{ 'home.sendDescription' | translate }}</p>
+        </div>
+        <div class="action-arrow">→</div>
+      </button>
+
+      <button
+        class="action-btn secondary-action"
+        (click)="navigateToMessages()"
+      >
+        <div class="action-icon">📬</div>
+        <div class="action-content">
+          <h3>{{ 'home.receivedMessages' | translate }}</h3>
+          <p>{{ 'home.messagesDescription' | translate }}</p>
+        </div>
+        <div class="action-badge" *ngIf="receivedCount() > 0">
+          {{ receivedCount() }}
+        </div>
+        <div class="action-arrow">→</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Statistics Card -->
+  <div class="card stats-card" *ngIf="hasStats()">
+    <h2 class="card-title">{{ 'home.stats' | translate }}</h2>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">{{ messageCount() }}</div>
+        <div class="stat-label">{{ 'home.messagesSent' | translate }}</div>
+        <div class="stat-icon">🚀</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-number">{{ receivedCount() }}</div>
+        <div class="stat-label">{{ 'home.messagesReceived' | translate }}</div>
+        <div class="stat-icon">📥</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-number">{{ replyCount() }}</div>
+        <div class="stat-label">{{ 'home.repliesSent' | translate }}</div>
+        <div class="stat-icon">💌</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Messages -->
+  <div class="card messages-card" *ngIf="recentMessages().length > 0">
+    <div class="card-header">
+      <h2 class="card-title">{{ 'home.recentMessages' | translate }}</h2>
+      <button
+        class="btn btn-secondary btn-small"
+        (click)="navigateToMessages()"
+      >
+        {{ 'home.viewAll' | translate }}
+      </button>
+    </div>
+
+    <div class="message-list">
+      <div
+        *ngFor="let message of recentMessages()"
+        class="message-item"
+        (click)="navigateToReply(message.id)"
+      >
+        <div class="message-content">
+          <p class="message-text">{{ getMessagePreview(message.content) }}</p>
+          <div class="message-meta">
+            <span class="message-time">{{ getTimeAgo(message.sentAt) }}</span>
+            <span class="message-status" [class.replied]="message.hasReply">
+              {{ message.hasReply ? ('reply.alreadyReplied' | translate) : ('message.received.canReply' | translate) }}
+            </span>
+          </div>
+        </div>
+        <div class="message-arrow" *ngIf="!message.hasReply">→</div>
+        <div class="message-check" *ngIf="message.hasReply">✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="card empty-card" *ngIf="!isLoading() && recentMessages().length === 0 && !hasStats()">
+    <div class="empty-content">
+      <div class="empty-icon">🍃</div>
+      <h3>{{ 'home.welcome.new' | translate }}</h3>
+      <p>{{ 'home.welcome.description' | translate }}</p>
+      <button
+        class="btn btn-primary btn-large"
+        (click)="navigateToSend()"
+      >
+        {{ 'home.sendFirstMessage' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="card loading-card" *ngIf="isLoading()">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>{{ 'common.loading' | translate }}</p>
+    </div>
+  </div>
+
+  <!-- Refresh Button -->
+  <button
+    class="refresh-btn btn-icon"
+    (click)="refresh()"
+    [title]="'common.refresh' | translate"
+    [disabled]="isLoading()"
+  >
+    🔄
+  </button>
+
+</div>
