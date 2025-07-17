@@ -1,0 +1,134 @@
+{
+  "app": {
+    "name": "MorePiroz",
+    "subtitle": "Kutsal Deniz",
+    "description": "Dertlerini paylaş, destek bul"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "confirm": "Onayla",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "back": "Geri",
+    "next": "İleri",
+    "send": "Gönder",
+    "reply": "Yanıtla",
+    "close": "Kapat"
+  },
+  "language": {
+    "select": "Dil seçin",
+    "current": "Mevcut dil",
+    "change": "Dili değiştir",
+    "ukrainian": "Ukraynaca",
+    "kurdish": "Kürtçe",
+    "english": "İngilizce",
+    "turkish": "Türkçe",
+    "russian": "Rusça"
+  },
+  "auth": {
+    "welcome": "MorePiroz'a hoş geldiniz",
+    "selectLanguage": "Uygulama dilini seçin",
+    "createSession": "Anonim oturum başlat",
+    "sessionCreated": "Oturum başarıyla oluşturuldu",
+    "sessionError": "Oturum oluşturma hatası"
+  },
+  "home": {
+    "title": "Ana Sayfa",
+    "sendMessage": "Mesaj gönder",
+    "receivedMessages": "Gelen mesajlar",
+    "stats": "İstatistikler",
+    "messagesSent": "Gönderilen",
+    "messagesReceived": "Alınan",
+    "repliesSent": "Yanıt gönderilen"
+  },
+  "message": {
+    "send": {
+      "title": "Mesaj gönder",
+      "placeholder": "Düşüncelerinizi paylaşın...",
+      "button": "Şişeyi denize at",
+      "success": "Mesaj denize gönderildi",
+      "error": "Mesaj gönderme hatası",
+      "empty": "Mesaj boş olamaz",
+      "tooLong": "Mesaj çok uzun"
+    },
+    "received": {
+      "title": "Gelen mesajlar",
+      "empty": "Henüz mesaj yok",
+      "newMessage": "Yeni mesaj",
+      "timeAgo": "{{time}} önce",
+      "canReply": "Yanıtlayabilirsiniz",
+      "alreadyReplied": "Zaten yanıtlandı",
+      "reply": "Yanıtla"
+    }
+  },
+  "reply": {
+    "title": "Mesajı yanıtla",
+    "selectTemplate": "Bir yanıt seçin",
+    "categories": {
+      "SUPPORT": "Destek",
+      "EMPATHY": "Empati",
+      "ENCOURAGEMENT": "Cesaret",
+      "MOTIVATION": "Motivasyon",
+      "UNDERSTANDING": "Anlayış"
+    },
+    "templates": {
+      "support": {
+        "1": "Anlıyorum, yalnız değilsin ❤️",
+        "2": "Dayan, her şey yoluna girecek 🤗",
+        "3": "Paylaştığın için teşekkürler 💙"
+      },
+      "empathy": {
+        "1": "Ben de aynısını hissettim 😊",
+        "2": "Bu çok zor olmalı 💙",
+        "3": "Hislerin geçerli ✨"
+      },
+      "encouragement": {
+        "1": "Düşündüğünden daha güçlüsün 💪",
+        "2": "Yarın yeni bir gün 🌅",
+        "3": "Başarabilirsin 🌟"
+      },
+      "motivation": {
+        "1": "Adım adım 🚶‍♀️",
+        "2": "Doğru yoldasın ✨",
+        "3": "İlerlemeye devam et 🌈"
+      },
+      "understanding": {
+        "1": "Kendine karşı nazik ol 🌸",
+        "2": "Bu normal 💚",
+        "3": "Hissetmene izin ver 🤲"
+      }
+    },
+    "success": "Yanıt gönderildi",
+    "error": "Yanıt gönderme hatası",
+    "alreadyReplied": "Bu mesajı zaten yanıtladınız",
+    "oneReplyOnly": "Sadece bir kez yanıtlayabilirsiniz"
+  },
+  "navigation": {
+    "home": "Ana Sayfa",
+    "send": "Gönder",
+    "messages": "Mesajlar",
+    "settings": "Ayarlar"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "language": "Dil",
+    "notifications": "Bildirimler",
+    "privacy": "Gizlilik",
+    "about": "Uygulama hakkında"
+  },
+  "time": {
+    "now": "Şimdi",
+    "minuteAgo": "bir dakika önce",
+    "minutesAgo": "{{count}} dakika önce",
+    "hourAgo": "bir saat önce",
+    "hoursAgo": "{{count}} saat önce",
+    "dayAgo": "bir gün önce",
+    "daysAgo": "{{count}} gün önce",
+    "weekAgo": "bir hafta önce",
+    "weeksAgo": "{{count}} hafta önce"
+  }
+}

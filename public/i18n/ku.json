@@ -1,0 +1,134 @@
+{
+  "app": {
+    "name": "MorePiroz",
+    "subtitle": "Deryaya Pîroz",
+    "description": "Derdên xwe parve bike, piştgirî bibîne"
+  },
+  "common": {
+    "loading": "Tê barkirin...",
+    "error": "Çewtî",
+    "success": "Serkeftin",
+    "save": "Tomar bike",
+    "cancel": "Betal bike",
+    "confirm": "Piştrast bike",
+    "delete": "Jê bibe",
+    "edit": "Sererast bike",
+    "back": "Veger",
+    "next": "Pêş",
+    "send": "Bişîne",
+    "reply": "Bersiv bide",
+    "close": "Bigire"
+  },
+  "language": {
+    "select": "Ziman hilbijêre",
+    "current": "Zimana niha",
+    "change": "Ziman biguherîne",
+    "ukrainian": "Ukraynî",
+    "kurdish": "Kurdî",
+    "english": "Îngilîzî",
+    "turkish": "Tirkî",
+    "russian": "Rûsî"
+  },
+  "auth": {
+    "welcome": "Bi xêr hatî MorePiroz",
+    "selectLanguage": "Zimana sepanê hilbijêre",
+    "createSession": "Destpêka nesnas bike",
+    "sessionCreated": "Destpêk bi serkeftin çêbû",
+    "sessionError": "Çewtiya çêkirina destpêkê"
+  },
+  "home": {
+    "title": "Sereke",
+    "sendMessage": "Peyam bişîne",
+    "receivedMessages": "Peyamên hatî",
+    "stats": "Amarî",
+    "messagesSent": "Şandiye",
+    "messagesReceived": "Hatiye",
+    "repliesSent": "Bersiv şandiye"
+  },
+  "message": {
+    "send": {
+      "title": "Peyam bişîne",
+      "placeholder": "Hest û ramanên xwe parve bike...",
+      "button": "Şûşeyê bavêje deryayê",
+      "success": "Peyam çû deryayê",
+      "error": "Çewtiya şandina peyamê",
+      "empty": "Peyam nikare vala be",
+      "tooLong": "Peyam pir dirêj e"
+    },
+    "received": {
+      "title": "Peyamên hatî",
+      "empty": "Hêj peyam tunin",
+      "newMessage": "Peyama nû",
+      "timeAgo": "{{time}} berê",
+      "canReply": "Dikarî bersiv bidî",
+      "alreadyReplied": "Jixwe bersiv dayî",
+      "reply": "Bersiv bide"
+    }
+  },
+  "reply": {
+    "title": "Ji peyamê re bersiv bide",
+    "selectTemplate": "Bersivek hilbijêre",
+    "categories": {
+      "SUPPORT": "Piştgirî",
+      "EMPATHY": "Hevderdî",
+      "ENCOURAGEMENT": "Hevraz",
+      "MOTIVATION": "Motîvasyon",
+      "UNDERSTANDING": "Fehm"
+    },
+    "templates": {
+      "support": {
+        "1": "Ez fehm dikim, tu ne bi tenê yî ❤️",
+        "2": "Xurt be, her tişt baş dibe 🤗",
+        "3": "Spas ji bo parvekirinê 💙"
+      },
+      "empathy": {
+        "1": "Ez jî heman tişt hîs dikir 😊",
+        "2": "Ev pir zehmet e 💙",
+        "3": "Hestên te normal in ✨"
+      },
+      "encouragement": {
+        "1": "Tu ji ku difikî xurttir î 💪",
+        "2": "Sibê rojeke nû ye 🌅",
+        "3": "Tu dikarî 🌟"
+      },
+      "motivation": {
+        "1": "Gav bi gav 🚶‍♀️",
+        "2": "Tu li ser rêya rast î ✨",
+        "3": "Berdewam be 🌈"
+      },
+      "understanding": {
+        "1": "Li xwe dilovan be 🌸",
+        "2": "Ev normal e 💚",
+        "3": "Destûrê bide xwe hîs bikî 🤲"
+      }
+    },
+    "success": "Bersiv hat şandin",
+    "error": "Çewtiya şandina bersivê",
+    "alreadyReplied": "Tu jixwe ji vê peyamê re bersiv dayî",
+    "oneReplyOnly": "Tenê carekê bersiv dide"
+  },
+  "navigation": {
+    "home": "Sereke",
+    "send": "Bişîne",
+    "messages": "Peyam",
+    "settings": "Sazkarî"
+  },
+  "settings": {
+    "title": "Sazkarî",
+    "language": "Ziman",
+    "notifications": "Agahdarî",
+    "privacy": "Veşartî",
+    "about": "Derbarê sepanê"
+  },
+  "time": {
+    "now": "Niha",
+    "minuteAgo": "deqeyekê berê",
+    "minutesAgo": "{{count}} deqe berê",
+    "hourAgo": "saetekê berê",
+    "hoursAgo": "{{count}} saet berê",
+    "dayAgo": "rojekê berê",
+    "daysAgo": "{{count}} roj berê",
+    "weekAgo": "hefteyekê berê",
+    "weeksAgo": "{{count}} hefte berê"
+  }
+}

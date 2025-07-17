@@ -1,0 +1,134 @@
+{
+  "app": {
+    "name": "MorePiroz",
+    "subtitle": "Sacred Sea",
+    "description": "Share your feelings, find support"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "send": "Send",
+    "reply": "Reply",
+    "close": "Close"
+  },
+  "language": {
+    "select": "Select language",
+    "current": "Current language",
+    "change": "Change language",
+    "ukrainian": "Ukrainian",
+    "kurdish": "Kurdish",
+    "english": "English",
+    "turkish": "Turkish",
+    "russian": "Russian"
+  },
+  "auth": {
+    "welcome": "Welcome to MorePiroz",
+    "selectLanguage": "Select app language",
+    "createSession": "Start anonymous session",
+    "sessionCreated": "Session created successfully",
+    "sessionError": "Session creation error"
+  },
+  "home": {
+    "title": "Home",
+    "sendMessage": "Send message",
+    "receivedMessages": "Received messages",
+    "stats": "Statistics",
+    "messagesSent": "Sent",
+    "messagesReceived": "Received",
+    "repliesSent": "Replies sent"
+  },
+  "message": {
+    "send": {
+      "title": "Send message",
+      "placeholder": "Share your thoughts...",
+      "button": "Throw bottle into sea",
+      "success": "Message sent to the sea",
+      "error": "Message sending error",
+      "empty": "Message cannot be empty",
+      "tooLong": "Message too long"
+    },
+    "received": {
+      "title": "Received messages",
+      "empty": "No messages yet",
+      "newMessage": "New message",
+      "timeAgo": "{{time}} ago",
+      "canReply": "You can reply",
+      "alreadyReplied": "Already replied",
+      "reply": "Reply"
+    }
+  },
+  "reply": {
+    "title": "Reply to message",
+    "selectTemplate": "Select a reply",
+    "categories": {
+      "SUPPORT": "Support",
+      "EMPATHY": "Empathy",
+      "ENCOURAGEMENT": "Encouragement",
+      "MOTIVATION": "Motivation",
+      "UNDERSTANDING": "Understanding"
+    },
+    "templates": {
+      "support": {
+        "1": "I understand, you're not alone ❤️",
+        "2": "Hang in there, everything will be okay 🤗",
+        "3": "Thank you for sharing 💙"
+      },
+      "empathy": {
+        "1": "I felt the same way 😊",
+        "2": "This must be very hard 💙",
+        "3": "Your feelings are valid ✨"
+      },
+      "encouragement": {
+        "1": "You're stronger than you think 💪",
+        "2": "Tomorrow is a new day 🌅",
+        "3": "You've got this 🌟"
+      },
+      "motivation": {
+        "1": "Step by step 🚶‍♀️",
+        "2": "You're on the right path ✨",
+        "3": "Keep moving forward 🌈"
+      },
+      "understanding": {
+        "1": "Be kind to yourself 🌸",
+        "2": "This is normal 💚",
+        "3": "Allow yourself to feel 🤲"
+      }
+    },
+    "success": "Reply sent",
+    "error": "Reply sending error",
+    "alreadyReplied": "You already replied to this message",
+    "oneReplyOnly": "You can only reply once"
+  },
+  "navigation": {
+    "home": "Home",
+    "send": "Send",
+    "messages": "Messages",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "about": "About app"
+  },
+  "time": {
+    "now": "Now",
+    "minuteAgo": "a minute ago",
+    "minutesAgo": "{{count}} minutes ago",
+    "hourAgo": "an hour ago",
+    "hoursAgo": "{{count}} hours ago",
+    "dayAgo": "a day ago",
+    "daysAgo": "{{count}} days ago",
+    "weekAgo": "a week ago",
+    "weeksAgo": "{{count}} weeks ago"
+  }
+}
