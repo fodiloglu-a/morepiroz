@@ -150,11 +150,67 @@
     "settings": "Ayarlar"
   },
   "settings": {
-    "title": "Ayarlar",
-    "language": "Dil",
-    "notifications": "Bildirimler",
-    "privacy": "Gizlilik",
-    "about": "Uygulama hakkında"
+    "subtitle": "Uygulama tercihlerinizi yönetin",
+    "devMode": {
+      "title": "Geliştirme Modu",
+      "description": "Mock verilerle çalışıyorsunuz"
+    },
+    "language": {
+      "title": "Dil Ayarları",
+      "current": "Mevcut dil"
+    },
+    "appearance": {
+      "title": "Görünüm",
+      "darkMode": "Karanlık mod",
+      "darkModeDesc": "Gözlerinizi yoracak daha az ışık"
+    },
+    "notifications": {
+      "title": "Bildirimler",
+      "enable": "Bildirimleri etkinleştir",
+      "enableDesc": "Yeni mesajlar için bildirim al",
+      "sound": "Ses bildirimleri",
+      "soundDesc": "Bildirimlerle birlikte ses çal"
+    },
+    "session": {
+      "title": "Oturum Bilgileri",
+      "created": "Oluşturulma",
+      "expires": "Bitiş",
+      "messages": "Mesaj sayısı",
+      "replies": "Yanıt sayısı",
+      "storage": "Depolama kullanımı"
+    },
+    "data": {
+      "title": "Veri Yönetimi",
+      "export": "Verileri dışa aktar",
+      "reset": "Varsayılanlara sıfırla",
+      "clear": "Tüm verileri temizle"
+    },
+    "clearData": {
+      "confirmTitle": "Tüm veriler silinsin mi?",
+      "confirmDescription": "Bu işlem geri alınamaz. Tüm mesajlarınız, ayarlarınız ve oturum bilgileriniz silinecek.",
+      "confirm": "Evet, sil",
+      "clearing": "Siliniyor..."
+    },
+    "support": {
+      "title": "Destek",
+      "feedback": "Geri bildirim gönder",
+      "help": "Yardım merkezi"
+    },
+    "about": {
+      "title": "Uygulama hakkında",
+      "description": "MorePiroz - Duyguları paylaşın, destek bulun. Tamamen anonim ve güvenli."
+    },
+    "legal": {
+      "title": "Yasal",
+      "privacy": "Gizlilik politikası",
+      "terms": "Kullanım şartları"
+    },
+    "app": {
+      "version": "Sürüm"
+    },
+    "feedback": {
+      "template": "MorePiroz hakkındaki düşüncelerinizi paylaşın..."
+    }
   },
   "time": {
     "now": "Şimdi",

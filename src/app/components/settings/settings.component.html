@@ -1,1 +1,215 @@
-<p>settings works!</p>
+<!-- src/app/components/settings/settings.component.html -->
+
+<div class="settings-container">
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" *ngIf="showDeleteConfirm()">
+    <div class="modal-content card">
+      <h3>{{ 'settings.clearData.confirmTitle' | translate }}</h3>
+      <p>{{ 'settings.clearData.confirmDescription' | translate }}</p>
+
+      <div class="modal-actions">
+        <button
+          class="btn btn-secondary"
+          (click)="cancelClearData()"
+          [disabled]="isLoading()"
+        >
+          {{ 'common.cancel' | translate }}
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="confirmClearData()"
+          [disabled]="isLoading()"
+          [class.loading]="isLoading()"
+        >
+          <span *ngIf="!isLoading()">{{ 'settings.clearData.confirm' | translate }}</span>
+          <span *ngIf="isLoading()" class="loading-text">
+            <span class="spinner"></span>
+            {{ 'settings.clearData.clearing' | translate }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="card settings-header">
+    <div class="header-content">
+      <button class="btn-icon back-btn" (click)="goBack()">
+        ←
+      </button>
+      <div class="header-text">
+        <h1>{{ 'settings.title' | translate }}</h1>
+        <p>{{ 'settings.subtitle' | translate }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Development Banner -->
+  <div class="dev-banner card" *ngIf="isDevelopmentMode()">
+    <div class="banner-icon">🚧</div>
+    <div class="banner-text">
+      <strong>{{ 'settings.devMode.title' | translate }}</strong>
+      <p>{{ 'settings.devMode.description' | translate }}</p>
+    </div>
+  </div>
+
+  <!-- Language Settings -->
+  <div class="card settings-section">
+    <h3>{{ 'settings.language.title' | translate }}</h3>
+    <div class="setting-item">
+      <div class="setting-info">
+        <span class="setting-label">{{ 'settings.language.current' | translate }}</span>
+        <span class="setting-value">{{ getCurrentLanguageInfo()?.nativeName }}</span>
+      </div>
+      <app-language-selector (languageChanged)="onLanguageChange()"></app-language-selector>
+    </div>
+  </div>
+
+  <!-- Appearance Settings -->
+  <div class="card settings-section">
+    <h3>{{ 'settings.appearance.title' | translate }}</h3>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <span class="setting-label">{{ 'settings.appearance.darkMode' | translate }}</span>
+        <span class="setting-description">{{ 'settings.appearance.darkModeDesc' | translate }}</span>
+      </div>
+      <button
+        class="toggle-switch"
+        [class.active]="isDarkMode()"
+        (click)="toggleDarkMode()"
+      >
+        <span class="toggle-slider"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Notification Settings -->
+  <div class="card settings-section">
+    <h3>{{ 'settings.notifications.title' | translate }}</h3>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <span class="setting-label">{{ 'settings.notifications.enable' | translate }}</span>
+        <span class="setting-description">{{ 'settings.notifications.enableDesc' | translate }}</span>
+      </div>
+      <button
+        class="toggle-switch"
+        [class.active]="notificationsEnabled()"
+        (click)="toggleNotifications()"
+      >
+        <span class="toggle-slider"></span>
+      </button>
+    </div>
+
+    <div class="setting-item">
+      <div class="setting-info">
+        <span class="setting-label">{{ 'settings.notifications.sound' | translate }}</span>
+        <span class="setting-description">{{ 'settings.notifications.soundDesc' | translate }}</span>
+      </div>
+      <button
+        class="toggle-switch"
+        [class.active]="soundEnabled()"
+        (click)="toggleSound()"
+      >
+        <span class="toggle-slider"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Session Info -->
+  <div class="card settings-section" *ngIf="currentSession()">
+    <h3>{{ 'settings.session.title' | translate }}</h3>
+
+    <div class="session-stats">
+      <div class="stat-item">
+        <span class="stat-label">{{ 'settings.session.created' | translate }}</span>
+        <span class="stat-value">{{ getSessionInfo()?.created }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">{{ 'settings.session.expires' | translate }}</span>
+        <span class="stat-value">{{ getSessionInfo()?.expires }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">{{ 'settings.session.messages' | translate }}</span>
+        <span class="stat-value">{{ getSessionInfo()?.messageCount }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">{{ 'settings.session.replies' | translate }}</span>
+        <span class="stat-value">{{ getSessionInfo()?.replyCount }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">{{ 'settings.session.storage' | translate }}</span>
+        <span class="stat-value">{{ getStorageUsage() }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Management -->
+  <div class="card settings-section">
+    <h3>{{ 'settings.data.title' | translate }}</h3>
+
+    <div class="action-buttons">
+      <button class="btn btn-secondary btn-full" (click)="exportData()">
+        📥 {{ 'settings.data.export' | translate }}
+      </button>
+
+      <button class="btn btn-secondary btn-full" (click)="resetToDefaults()">
+        🔄 {{ 'settings.data.reset' | translate }}
+      </button>
+
+      <button class="btn btn-danger btn-full" (click)="clearData()">
+        🗑️ {{ 'settings.data.clear' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Support & Info -->
+  <div class="card settings-section">
+    <h3>{{ 'settings.support.title' | translate }}</h3>
+
+    <div class="action-buttons">
+      <button class="btn btn-secondary btn-full" (click)="sendFeedback()">
+        💬 {{ 'settings.support.feedback' | translate }}
+      </button>
+
+      <button class="btn btn-secondary btn-full" (click)="openSupport()">
+        ❓ {{ 'settings.support.help' | translate }}
+      </button>
+
+      <button class="btn btn-secondary btn-full" (click)="openAbout()">
+        ℹ️ {{ 'settings.about.title' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Legal -->
+  <div class="card settings-section">
+    <h3>{{ 'settings.legal.title' | translate }}</h3>
+
+    <div class="action-buttons">
+      <button class="btn btn-secondary btn-full" (click)="openPrivacyPolicy()">
+        🔒 {{ 'settings.legal.privacy' | translate }}
+      </button>
+
+      <button class="btn btn-secondary btn-full" (click)="openTermsOfService()">
+        📋 {{ 'settings.legal.terms' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- App Info Footer -->
+  <div class="card app-info">
+    <div class="app-logo">🌊</div>
+    <div class="app-details">
+      <h4>{{ 'app.name' | translate }}</h4>
+      <p>{{ 'app.description' | translate }}</p>
+      <div class="version-info">
+        <span>{{ 'settings.app.version' | translate }}: {{ appVersion }}</span>
+        <span>© {{ buildDate }} MorePiroz</span>
+      </div>
+    </div>
+  </div>
+
+</div>
